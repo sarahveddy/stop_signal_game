@@ -30,3 +30,6 @@ ExportedObj/
 *.unitypackage
 *.app
 *.exe
+
+
+*.DS_Store
