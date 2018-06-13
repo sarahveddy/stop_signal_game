@@ -31,12 +31,6 @@ public class PlayerMotor : MonoBehaviour
 	{
 		moveVector = Vector3.zero; //resets move vector
 
-		
-		
-		//X - left and right
-		moveVector.x = Input.GetAxisRaw("Horizontal") * speed; //TODO
-		
-		//Y - up and down
 		if (controller.isGrounded)
 		{
 			verticalVelocity = -0.5f; //little push toward the ground
@@ -45,6 +39,12 @@ public class PlayerMotor : MonoBehaviour
 		{
 			verticalVelocity -= gravity * Time.deltaTime; //falling down
 		}
+
+		
+		//X - left and right
+		moveVector.x = Input.GetAxisRaw("Horizontal") * speed; //TODO
+		
+		//Y - up and down
 
 		moveVector.y = verticalVelocity; //TODO
 		
