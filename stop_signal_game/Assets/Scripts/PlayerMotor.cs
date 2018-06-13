@@ -6,19 +6,54 @@ using UnityEngine;
 public class PlayerMotor : MonoBehaviour
 {
 
+	//private variables
 	private CharacterController controller;
+	private Vector3 moveVector;
+	private float verticalVelocity = 0.0f;
+	
 
+	
+	//public variables
 	[Range(1.0f, 10.0f)] 
 	public float speed = 5.0f; 
+	
+	[Range(1.0f, 15.0f)] 
+	public float gravity = 12.0f; // TODO
+	
 
 	void Start ()
 	{
 		controller = GetComponent<CharacterController>(); 
 	}
 	
+	
 	void Update ()
 	{
+		moveVector = Vector3.zero; //resets move vector
+
 		
-		controller.Move((Vector3.forward * speed) * Time.deltaTime); 
+		
+		//X - left and right
+		moveVector.x = Input.GetAxisRaw("Horizontal") * speed; //TODO
+		
+		//Y - up and down
+		if (controller.isGrounded)
+		{
+			verticalVelocity = -0.5f; //little push toward the ground
+		}
+		else
+		{
+			verticalVelocity -= gravity * Time.deltaTime; //falling down
+		}
+
+		moveVector.y = verticalVelocity; //TODO
+		
+		//Z - forward and backward
+		moveVector.z = speed; 
+		
+		controller.Move(moveVector * Time.deltaTime); 
 	}
 }
+
+
+//TODO: remove/keep vertical and horizontal movement if needed. 
