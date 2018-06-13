@@ -10,6 +10,8 @@ public class PlayerMotor : MonoBehaviour
 	private CharacterController controller;
 	private Vector3 moveVector;
 	private float verticalVelocity = 0.0f;
+	private bool inputOn = false;
+	private float animationDuration = 2.0f; //TODO: put this in the same place as the animationDuration var in CameraMotor
 	
 
 	
@@ -40,9 +42,12 @@ public class PlayerMotor : MonoBehaviour
 			verticalVelocity -= gravity * Time.deltaTime; //falling down
 		}
 
+		if (Time.time > animationDuration)
+		{
+			//X - left and right
+            moveVector.x = Input.GetAxisRaw("Horizontal") * speed; //TODO
+		}
 		
-		//X - left and right
-		moveVector.x = Input.GetAxisRaw("Horizontal") * speed; //TODO
 		
 		//Y - up and down
 
@@ -53,7 +58,10 @@ public class PlayerMotor : MonoBehaviour
 		
 		controller.Move(moveVector * Time.deltaTime); 
 	}
+
+
 }
 
+	
 
 //TODO: remove/keep vertical and horizontal movement if needed. 
