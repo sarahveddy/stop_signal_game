@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
@@ -15,22 +16,25 @@ public class PlayerMotor : MonoBehaviour
 	
 
 	
-	//public variables
+//	//public variables
 	[Range(1.0f, 10.0f)] 
 	public float speed = 5.0f; 
 	
 	[Range(1.0f, 15.0f)] 
 	public float gravity = 12.0f; // TODO
-	
+
+	private Rigidbody rigidBody; 
 
 	void Start ()
 	{
+	
 		controller = GetComponent<CharacterController>(); 
 	}
 	
 	
 	void Update ()
 	{
+
 		moveVector = Vector3.zero; //resets move vector
 
 		if (controller.isGrounded)
@@ -47,7 +51,6 @@ public class PlayerMotor : MonoBehaviour
 			//X - left and right
             moveVector.x = Input.GetAxisRaw("Horizontal") * speed; //TODO
 		}
-		
 		
 		//Y - up and down
 
