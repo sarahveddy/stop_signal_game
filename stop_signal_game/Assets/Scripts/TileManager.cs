@@ -45,10 +45,7 @@ public class TileManager : MonoBehaviour
 			DeleteTile();
 		}
 
-//		if (Input.GetKey("space"))
-//		{
-//			transform.RotateAround(playerTransform.position, Vector3.up, 300 * Time.deltaTime);
-//		}
+
 	}
 
 	private void SpawnTile(int prefabIndex = -1)
