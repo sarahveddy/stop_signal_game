@@ -84,23 +84,28 @@ public class JunctionManager : MonoBehaviour
 	{
 		Debug.Log("Spawn Junctions"); 
 		//
-//		GameObject leftPath = Instantiate(junctionPrefabs[0]) as GameObject; 
-//		leftPath.transform.SetParent(transform);
-//		leftPath.transform.Rotate(Vector3.up, -90);
-//		leftPath.transform.position = new Vector3(-pathWidth/2, 0, crossroadLength + currentJunction.getPathLength() - pathWidth/2);
-//		//activeJunctions.Add(leftPath);
-//		
-//		GameObject rightPath = Instantiate(junctionPrefabs[0]) as GameObject; 
-//		rightPath.transform.SetParent(transform);	
-//		rightPath.transform.Rotate(Vector3.up, 90);
-//		rightPath.transform.position = new Vector3(pathWidth/2, 0, crossroadLength + currentJunction.getPathLength() - pathWidth/2);
-//		//activeJunctions.Add(rightPath);
+		GameObject leftPath = Instantiate(junctionPrefabs[0]) as GameObject; 
+		leftPath.transform.SetParent(transform);
+		leftPath.transform.Rotate(Vector3.up, -90);
+		leftPath.transform.position = new Vector3(-pathWidth/2, 0, currentJunction.transform.position.z + 
+		                                                           crossroadLength + currentJunction.getPathLength() - 
+		                                                           pathWidth/2);
+		//activeJunctions.Add(leftPath);
+		
+		GameObject rightPath = Instantiate(junctionPrefabs[0]) as GameObject; 
+		rightPath.transform.SetParent(transform);	
+		rightPath.transform.Rotate(Vector3.up, 90);
+		rightPath.transform.position = new Vector3(pathWidth/2, 0, currentJunction.transform.position.z + 
+		                                                           crossroadLength + currentJunction.getPathLength() - 
+		                                                           pathWidth/2);
+		//activeJunctions.Add(rightPath);
 //		
 		GameObject forewardPath = Instantiate(junctionPrefabs[0]) as GameObject; 
 		forewardPath.transform.SetParent(transform);
-		forewardPath.transform.position = Vector3.forward * (crossroadLength + currentJunction.getPathLength());
-		activeJunctions.Add(forewardPath);
-		Debug.Log(activeJunctions); 
+		forewardPath.transform.position = new Vector3(0, 0, currentJunction.transform.position.z + 
+		                                                    crossroadLength + currentJunction.getPathLength());
+//		activeJunctions.Add(forewardPath);
+//		Debug.Log(activeJunctions); 
 	}
 
 	private void DestroyJunctions()

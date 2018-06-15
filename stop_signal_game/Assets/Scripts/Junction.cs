@@ -15,7 +15,8 @@ public class Junction : MonoBehaviour {
 		// Use this for initialization
     	void Start () {
     		junctionManager = GameObject.FindWithTag("JunctionManager");
-    	}
+		    pathLength = 10; 
+	    }
     	
     	// Update is called once per frame
     	void Update () {
