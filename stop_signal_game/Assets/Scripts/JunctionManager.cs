@@ -53,15 +53,6 @@ public class JunctionManager : MonoBehaviour
 		
 	}
 
-	void OnTriggerEnter(Collider col)
-	{
-		if (col.gameObject.tag == "Player")
-		{
-			//currentJunction = 
-			Debug.Log("collision");
-		}
-	}
-	
 	//will generate a list of junctions that will build the level
 	//this list must be ~75% go trials and ~25% stop trials
 	//junctions also have a length of time before stimulus is shown
@@ -130,41 +121,5 @@ public class JunctionManager : MonoBehaviour
 		}
 			
 	}
-	
-	/*
-	 * This class represents the data of a junction
-	 * stopTrail is a bool that represents whether this junction is a stop or go trial
-	 * direction is a char the represnts the correct direction of the junction
-	 * timeBefore is the ammount of time to pass before the junction occurs 
-	 */
-	private class Junction
-	{
-		private GameObject gameObject; 
-	    private bool stopTrial;
-	    private char direction; //'r' if right is the correct choice, 'l' if left is the correct choice
-	    private float timeBefore; //this is the ammount of time before the stimulus is shown
-	    private float pathLength; //the length of the path 
-	    
-		public Junction(bool stopTrial, char dir, float time, float len)
-		{
-			//TODO: check the input - throw errors
-			this.stopTrial = stopTrial;
-			this.direction = dir;
-			this.timeBefore = time;
-			this.pathLength = len; 
-			//TODO: add length of path (a function of timeBefore and speed)
-		}
-
-	    public bool isStopTrial()
-	    {
-		    return this.stopTrial; 
-	    }
-
-	    public float getPathLength()
-	    {
-		    return this.pathLength; 
-	    }
-	    
-    }
 }
 

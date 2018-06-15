@@ -10,7 +10,17 @@ public class Junction : MonoBehaviour {
 	private char direction; //'r' if right is the correct choice, 'l' if left is the correct choice
 	private float timeBefore; //this is the ammount of time before the stimulus is shown
 	private float pathLength; //the length of the path 
-	    
+	   
+	
+	void OnTriggerEnter(Collider col)
+	{
+		if (col.gameObject.tag == "Player")
+		{
+			//currentJunction = 
+			Debug.Log("collision");
+		}
+	}
+	
 	public Junction(bool stopTrial, char dir, float time, float len)
 	{
 		//TODO: check the input - throw errors
