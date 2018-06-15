@@ -9,7 +9,7 @@ using NUnit.Framework;
 public class JunctionManager : MonoBehaviour
 {
 	private List<Junction> allJunctions; //TODO: maybe a different collection data type
-	private Junction currentJunction; //the junction that the player is currently on?
+	//private Junction currentJunction; //the junction that the player is currently on?
 	
 	private List<GameObject> activeJunctions; //list of junction game objects that are in the scene
 
@@ -28,26 +28,36 @@ public class JunctionManager : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		//get player info	
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerTransform = player.transform; 
-		allJunctions = GenerateJunctions(20);
 		activeJunctions = new List<GameObject>();
-		currentJunction = allJunctions[0];
-		SpawnJunctions(); 
+		
+		GameObject path1 = Instantiate(junctionPrefabs[0]) as GameObject;
+		path1.transform.SetParent(transform);
+		activeJunctions.Add(path1);
+		
+		
+		//allJunctions = GenerateJunctions(20);
+		
+		//currentJunction = allJunctions[0];
+		
+		
+		//SpawnJunctions(); 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//TODO check if the player has crossed over a certain point and spawn more junctions
 		
-//		if (Input.GetKey(KeyCode.LeftArrow))
-//		{
-//			RotateWorld('l');
-//		}
-//		else if (Input.GetKey(KeyCode.RightArrow))
-//		{
-//			RotateWorld('r'); 
-//		}
+		if (Input.GetKey(KeyCode.LeftArrow))
+		{
+			RotateWorld('l');
+		}
+		else if (Input.GetKey(KeyCode.RightArrow))
+		{
+			RotateWorld('r'); 
+	}
 		
 		MoveWorld();	
 		
@@ -56,35 +66,36 @@ public class JunctionManager : MonoBehaviour
 	//will generate a list of junctions that will build the level
 	//this list must be ~75% go trials and ~25% stop trials
 	//junctions also have a length of time before stimulus is shown
-	private List<Junction> GenerateJunctions(int numberOfTrials)
-	{
-		//to do: make this do random stuff etc
-		List<Junction> list  = new List<Junction>();
-		for (int i = 0; i < numberOfTrials; i++)
-		{
-			list.Add(new Junction(true, 'r', 1, 10f));
-		}
-		//Debug.Log(list.Count);
-		return list; 
-	}
+//	private List<Junction> GenerateJunctions(int numberOfTrials)
+//	{
+////		//to do: make this do random stuff etc
+////		List<Junction> list  = new List<Junction>();
+////		for (int i = 0; i < numberOfTrials; i++)
+////		{
+////			list.Add(new Junction(true, 'r', 1, 10f));
+////		}
+////		//Debug.Log(list.Count);
+////		return list; 
+//	}
 	
 	//spawn 3 new junctions in each of the 3 direcions, left right and ahead
 	//this will happen immediately after a player chooses a direction (or runs out of time) 
-	private void SpawnJunctions()
+	private void SpawnJunctions(Junction currentJunction)
 	{
+		Debug.Log("Spawn Junctions"); 
 		//
-		GameObject leftPath = Instantiate(junctionPrefabs[0]) as GameObject; 
-		leftPath.transform.SetParent(transform);
-		leftPath.transform.Rotate(Vector3.up, -90);
-		leftPath.transform.position = new Vector3(-pathWidth/2, 0, crossroadLength + currentJunction.getPathLength() - pathWidth/2);
-		//activeJunctions.Add(leftPath);
-		
-		GameObject rightPath = Instantiate(junctionPrefabs[0]) as GameObject; 
-		rightPath.transform.SetParent(transform);	
-		rightPath.transform.Rotate(Vector3.up, 90);
-		rightPath.transform.position = new Vector3(pathWidth/2, 0, crossroadLength + currentJunction.getPathLength() - pathWidth/2);
-		//activeJunctions.Add(rightPath);
-		
+//		GameObject leftPath = Instantiate(junctionPrefabs[0]) as GameObject; 
+//		leftPath.transform.SetParent(transform);
+//		leftPath.transform.Rotate(Vector3.up, -90);
+//		leftPath.transform.position = new Vector3(-pathWidth/2, 0, crossroadLength + currentJunction.getPathLength() - pathWidth/2);
+//		//activeJunctions.Add(leftPath);
+//		
+//		GameObject rightPath = Instantiate(junctionPrefabs[0]) as GameObject; 
+//		rightPath.transform.SetParent(transform);	
+//		rightPath.transform.Rotate(Vector3.up, 90);
+//		rightPath.transform.position = new Vector3(pathWidth/2, 0, crossroadLength + currentJunction.getPathLength() - pathWidth/2);
+//		//activeJunctions.Add(rightPath);
+//		
 		GameObject forewardPath = Instantiate(junctionPrefabs[0]) as GameObject; 
 		forewardPath.transform.SetParent(transform);
 		forewardPath.transform.position = Vector3.forward * (crossroadLength + currentJunction.getPathLength());
