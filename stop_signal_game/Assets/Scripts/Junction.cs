@@ -12,23 +12,24 @@ public class Junction : MonoBehaviour {
 	private float timeBefore; //this is the ammount of time before the stimulus is shown
 	private float pathLength; //the length of the path 
 	   
-		// Use this for initialization
-    	void Start () {
-    		junctionManager = GameObject.FindWithTag("JunctionManager");
-		    pathLength = 10; 
-	    }
-    	
-    	// Update is called once per frame
-    	void Update () {
-    		
-    	}
+	// Use this for initialization
+	void Start () {
+		junctionManager = GameObject.FindWithTag("JunctionManager");
+		pathLength = 10; //TODO: make paths variable size
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+	
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.tag == "Player")
 		{
-			Debug.Log("Junction Collision");
 			junctionManager.SendMessage("SpawnJunctions", this);
 		}
+		
 	}
 	
 //	public Junction(bool stopTrial, char dir, float time, float len)
@@ -51,6 +52,4 @@ public class Junction : MonoBehaviour {
 		return this.pathLength; 
 	}
 	
-	
-
 }

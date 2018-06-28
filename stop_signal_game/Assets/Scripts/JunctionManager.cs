@@ -22,7 +22,7 @@ public class JunctionManager : MonoBehaviour
 	
 	public List<GameObject> junctionPrefabs;
 	
-	//[Range(1.0f, 10.0f)] 
+	[UnityEngine.Range(1.0f, 10.0f)] 
 	public float speed = 5.0f; 
 
 	// Use this for initialization
@@ -37,24 +37,17 @@ public class JunctionManager : MonoBehaviour
 		path1.transform.SetParent(transform);
 		activeJunctions.Add(path1);
 		
-		
-		//allJunctions = GenerateJunctions(20);
-		
-		//currentJunction = allJunctions[0];
-		
-		
-		//SpawnJunctions(); 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//TODO check if the player has crossed over a certain point and spawn more junctions
 		
-		if (Input.GetKey(KeyCode.LeftArrow))
+		if (Input.GetKeyDown(KeyCode.LeftArrow))
 		{
 			RotateWorld('l');
 		}
-		else if (Input.GetKey(KeyCode.RightArrow))
+		else if (Input.GetKeyDown(KeyCode.RightArrow))
 		{
 			RotateWorld('r'); 
 	}
@@ -82,15 +75,14 @@ public class JunctionManager : MonoBehaviour
 	//this will happen immediately after a player chooses a direction (or runs out of time) 
 	private void SpawnJunctions(Junction currentJunction)
 	{
-		Debug.Log("Spawn Junctions"); 
-		//
+		//Debug.Log("Spawn Junctions"); 
+		
 		GameObject leftPath = Instantiate(junctionPrefabs[0]) as GameObject; 
 		leftPath.transform.SetParent(transform);
 		leftPath.transform.Rotate(Vector3.up, -90);
 		leftPath.transform.position = new Vector3(-pathWidth/2, 0, currentJunction.transform.position.z + 
 		                                                           crossroadLength + currentJunction.getPathLength() - 
 		                                                           pathWidth/2);
-		//activeJunctions.Add(leftPath);
 		
 		GameObject rightPath = Instantiate(junctionPrefabs[0]) as GameObject; 
 		rightPath.transform.SetParent(transform);	
@@ -98,19 +90,11 @@ public class JunctionManager : MonoBehaviour
 		rightPath.transform.position = new Vector3(pathWidth/2, 0, currentJunction.transform.position.z + 
 		                                                           crossroadLength + currentJunction.getPathLength() - 
 		                                                           pathWidth/2);
-		//activeJunctions.Add(rightPath);
-//		
+		
 		GameObject forewardPath = Instantiate(junctionPrefabs[0]) as GameObject; 
 		forewardPath.transform.SetParent(transform);
 		forewardPath.transform.position = new Vector3(0, 0, currentJunction.transform.position.z + 
 		                                                    crossroadLength + currentJunction.getPathLength());
-//		activeJunctions.Add(forewardPath);
-//		Debug.Log(activeJunctions); 
-	}
-
-	private void DestroyJunctions()
-	{
-		
 	}
 
 	private void ChangeCurrentJunction()
@@ -127,13 +111,14 @@ public class JunctionManager : MonoBehaviour
 	//rotates the world around player in a specified direction
 	private void RotateWorld(char direction)
 	{
+		
 		if (direction == 'l' || direction == 'L')
 		{
-			transform.RotateAround(playerTransform.position, Vector3.up, 300 * Time.deltaTime);
+			transform.RotateAround(playerTransform.position, Vector3.up, 90);
 		}
 		else if (direction == 'r' || direction == 'R')
 		{
-			transform.RotateAround(playerTransform.position, Vector3.up, -300 * Time.deltaTime); 
+			transform.RotateAround(playerTransform.position, Vector3.up, 90); 
 		}
 			
 	}

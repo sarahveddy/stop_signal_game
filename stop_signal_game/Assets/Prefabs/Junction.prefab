@@ -58,8 +58,8 @@ GameObject:
   - component: {fileID: 65458983465379940}
   - component: {fileID: 114180312736506552}
   m_Layer: 0
-  m_Name: Junction 3 1
-  m_TagString: Untagged
+  m_Name: Junction
+  m_TagString: Junction
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,7 +205,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 1}
+  m_Size: {x: 10, y: 1, z: 0}
   m_Center: {x: 0, y: 0, z: 10}
 --- !u!65 &65951081723460332
 BoxCollider:
